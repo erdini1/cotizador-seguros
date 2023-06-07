@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
 
 /* Es recomendable que el context y el provider tengan el mismo nombre */
 // de esta forma el conteizadorCotnext ya va a tener un context creado
@@ -8,10 +8,14 @@ const CotizadorContext = createContext()
 
 const CotizadorProvider = ({ children }) => {
 
+    const [modal, setModal ] = useState(false)
+
     return (
+        // Una vex que lo paso dentro del value lo hago disponible dentro de toda la aplicación
         <CotizadorContext.Provider
             value={{
-
+                modal,
+                setModal
             }}
         >
             {children}

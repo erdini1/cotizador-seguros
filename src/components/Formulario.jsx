@@ -1,10 +1,22 @@
-import { Fragment } from "react"
+import { Fragment, useContext } from "react"
 import { MARCAS, YEARS, PLANES } from "../constants"
+import CotizadorContext from "../context/CotizadorProvider"
 
 
 const Formulario = () => {
+
+    const { modal, setModal } = useContext(CotizadorContext)
+    console.log(modal)
+
+
     return (
         <>
+
+            <button
+                onClick={() => setModal(!modal)}
+            >
+                Cambiar modal del context
+            </button>
             {/* Aca va una alerta */}
 
             <form action="">
@@ -71,7 +83,7 @@ const Formulario = () => {
                     </div>
                 </div>
 
-                <input type="submit" value="Consultar Precio" className="w-full bg-indigo-500 hover:bg-indigo-600 transition-colors text-white uppercase p-3 font-bold cursor-pointer"/>
+                <input type="submit" value="Consultar Precio" className="w-full bg-indigo-500 hover:bg-indigo-600 transition-colors text-white uppercase p-3 font-bold cursor-pointer" />
 
             </form>
 
