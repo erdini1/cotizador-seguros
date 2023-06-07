@@ -1,22 +1,14 @@
-import { Fragment, useContext } from "react"
+import { Fragment } from "react"
 import { MARCAS, YEARS, PLANES } from "../constants"
-import CotizadorContext from "../context/CotizadorProvider"
+import useCotizador from "../hooks/useCotizador"
 
 
 const Formulario = () => {
-
-    const { modal, setModal } = useContext(CotizadorContext)
-    console.log(modal)
 
 
     return (
         <>
 
-            <button
-                onClick={() => setModal(!modal)}
-            >
-                Cambiar modal del context
-            </button>
             {/* Aca va una alerta */}
 
             <form action="">

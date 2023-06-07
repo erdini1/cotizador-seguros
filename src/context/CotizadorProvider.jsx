@@ -8,14 +8,12 @@ const CotizadorContext = createContext()
 
 const CotizadorProvider = ({ children }) => {
 
-    const [modal, setModal ] = useState(false)
 
     return (
         // Una vex que lo paso dentro del value lo hago disponible dentro de toda la aplicación
         <CotizadorContext.Provider
             value={{
-                modal,
-                setModal
+
             }}
         >
             {children}
