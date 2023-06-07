@@ -8,12 +8,25 @@ const CotizadorContext = createContext()
 
 const CotizadorProvider = ({ children }) => {
 
+    const [datos, setDatos] = useState({
+        marca: "",
+        year: "",
+        plan: ""
+    })
+
+    const handleChangeDatos = e => {
+        setDatos({
+            ...datos,
+            [e.target.name]: e.target.value
+        })
+    }
 
     return (
         // Una vex que lo paso dentro del value lo hago disponible dentro de toda la aplicación
         <CotizadorContext.Provider
             value={{
-
+                datos,
+                handleChangeDatos
             }}
         >
             {children}

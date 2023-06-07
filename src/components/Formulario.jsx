@@ -1,10 +1,12 @@
-import { Fragment } from "react"
+import { Fragment, useState } from "react"
 import { MARCAS, YEARS, PLANES } from "../constants"
 import useCotizador from "../hooks/useCotizador"
 
 
 const Formulario = () => {
 
+    // Podria crear los state aca para almacenar los valores del formuario pero como van a  pasar entre varios componentes lo hago desde el provider
+    const { datos, handleChangeDatos } = useCotizador()
 
     return (
         <>
@@ -17,7 +19,13 @@ const Formulario = () => {
                         Marca
                     </label>
 
-                    <select name="marca" id="" className="w-full p-3 bg-white border border-gray-200">
+                    <select
+                        name="marca"
+                        id=""
+                        className="w-full p-3 bg-white border border-gray-200"
+                        onChange={e => handleChangeDatos(e)}
+                        value={datos.marca}
+                    >
                         <option value="">-- Seleccione Marca --</option>
                         {MARCAS.map(marca => (
                             <option
@@ -40,7 +48,13 @@ const Formulario = () => {
                         Año
                     </label>
 
-                    <select name="year" id="" className="w-full p-3 bg-white border border-gray-200">
+                    <select
+                        name="year"
+                        id=""
+                        className="w-full p-3 bg-white border border-gray-200"
+                        onChange={e => handleChangeDatos(e)}
+                        value={datos.year}
+                    >
                         <option value="">-- Seleccione Año --</option>
                         {YEARS.map(year => (
                             <option
@@ -69,6 +83,7 @@ const Formulario = () => {
                                     type="radio"
                                     name="plan"
                                     value={plan.id}
+                                    onChange={e => handleChangeDatos(e)}
                                 />
                             </Fragment>
                         ))}
