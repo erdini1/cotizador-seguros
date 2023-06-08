@@ -1,19 +1,37 @@
 import { Fragment, useState } from "react"
 import { MARCAS, YEARS, PLANES } from "../constants"
 import useCotizador from "../hooks/useCotizador"
+import Error from "./Error"
 
 
 const Formulario = () => {
 
     // Podria crear los state aca para almacenar los valores del formuario pero como van a  pasar entre varios componentes lo hago desde el provider
-    const { datos, handleChangeDatos } = useCotizador()
+    const { datos, handleChangeDatos, error, setError } = useCotizador()
+
+    // Al ser una función local no hace falta hacerla en el provider y pasarla
+    const handleSubmit = e => {
+        e.preventDefault()
+
+        // El object.values convierte listado en un array y ahi puedo aplicarle la función includes
+        if(Object.values(datos).includes("")){
+            setError("Todos los campos son obligatorios")
+            return
+        }
+
+        setError("")
+    }
 
     return (
         <>
 
-            {/* Aca va una alerta */}
+            {/* En caso de que haya un error debe mostrarlo, para eso necesito un componente */}
+            {error && <Error/>}
 
-            <form action="">
+            <form
+                action=""
+                onSubmit={handleSubmit}
+            >
                 <div className="my-5">
                     <label htmlFor="marca" className="block mb-3 font-bold text-gray-400 uppercase">
                         Marca
@@ -35,11 +53,6 @@ const Formulario = () => {
                                 {marca.nombre}
                             </option>
                         ))}
-
-
-                        {/* <option value={MARCAS[0].id}>{MARCAS[0].nombre}</option>
-                        <option value={MARCAS[1].id}>{MARCAS[1].nombre}</option>
-                        <option value={MARCAS[2].id}>{MARCAS[2].nombre}</option> */}
                     </select>
                 </div>
 
@@ -90,7 +103,11 @@ const Formulario = () => {
                     </div>
                 </div>
 
-                <input type="submit" value="Consultar Precio" className="w-full bg-indigo-500 hover:bg-indigo-600 transition-colors text-white uppercase p-3 font-bold cursor-pointer" />
+                <input
+                    type="submit"
+                    value="Consultar Precio"
+                    className="w-full bg-indigo-500 hover:bg-indigo-600 transition-colors text-white uppercase p-3 font-bold cursor-pointer"
+                />
 
             </form>
 
