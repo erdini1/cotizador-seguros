@@ -7,7 +7,7 @@ import Error from "./Error"
 const Formulario = () => {
 
     // Podria crear los state aca para almacenar los valores del formuario pero como van a  pasar entre varios componentes lo hago desde el provider
-    const { datos, handleChangeDatos, error, setError } = useCotizador()
+    const { datos, handleChangeDatos, error, setError, cotizarSeguro } = useCotizador()
 
     // Al ser una función local no hace falta hacerla en el provider y pasarla
     const handleSubmit = e => {
@@ -18,8 +18,10 @@ const Formulario = () => {
             setError("Todos los campos son obligatorios")
             return
         }
-
         setError("")
+
+        cotizarSeguro()
+
     }
 
     return (
